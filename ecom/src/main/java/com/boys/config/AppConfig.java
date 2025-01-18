@@ -25,8 +25,15 @@ public class AppConfig {
 
             @Override
             @Nullable
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest arg0) {
-               
+            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+               CorsConfiguration cfg=new CorsConfiguration()
+               cfg.setAllowedOrigins(
+                Array.asList(
+                    "http://localhost:3000",
+                )
+               );
+
+               return null
             }
             
         }
