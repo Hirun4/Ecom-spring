@@ -1,5 +1,7 @@
 package com.boys.config;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 
 import org.springframework.context.annotation.Bean;
@@ -35,6 +37,8 @@ public class AppConfig {
                                 ));
                         cfg.setAllowedMethods(Collections.singletonList("*");
                         cfg.setAllowCredentials(true);
+                        cfg.addAllowedHeader(Collections.singletonList("*"));
+                        cfg.addExposedHeader(Arrays.asList("Authorization"));
                         return null
                     }
 
