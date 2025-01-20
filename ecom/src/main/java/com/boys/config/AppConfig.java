@@ -29,18 +29,19 @@ public class AppConfig {
                     @Override
                     @Nullable
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                        CorsConfiguration cfg = new CorsConfiguration()
+                        CorsConfiguration cfg = new CorsConfiguration();
                         cfg.setAllowedOrigins(
-                                Array.asList(
+                                Arrays.asList(
                                         "http://localhost:3000",
-                                        "http://localhost:4200",
+                                        "http://localhost:4200"
                                 ));
-                        cfg.setAllowedMethods(Collections.singletonList("*");
+                        cfg.setAllowedMethods(Collections.singletonList("*"));
                         cfg.setAllowCredentials(true);
-                        cfg.addAllowedHeader(Collections.singletonList("*"));
-                        cfg.addExposedHeader(Arrays.asList("Authorization"));
+                        cfg.setAllowedHeaders(Collections.singletonList("*"));
+                        cfg.setExposedHeaders(Arrays.asList("Authorization"));
                         cfg.setMaxAge(3600L);
-                        return null
+                        return cfg;
+                        return null;
                     }
 
                 }
