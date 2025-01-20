@@ -15,6 +15,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+
+//  The @Configuration annotation marks this class as a configuration class in Spring, indicating
+//  that it contains bean definitions that Spring will use to configure the application context.
 @Configuration
 public class AppConfig {
 
@@ -45,8 +48,8 @@ public class AppConfig {
                     }
 
                 }
-                ).and().httpBasic().and().formLogin()
+                ).and().httpBasic().and().formLogin();
 
-        return null;
+        return http.build();
     }
 }
