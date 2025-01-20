@@ -1,5 +1,7 @@
 package com.boys.config;
 
+import java.util.Collections;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.Nullable;
@@ -11,36 +13,33 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@Configuration 
+@Configuration
 public class AppConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        .authorizeHttpRequests(Authorize->Authorize.requestMatchers("/api/**").authenticated().anyRequest().permitAll())
-        .addFilterBefore(null, null).csrf().disable()
-        .cors().configurationSource(new CorsConfigurationSource(){
+                .authorizeHttpRequests(Authorize -> Authorize.requestMatchers("/api/**").authenticated().anyRequest().permitAll())
+                .addFilterBefore(null, null).csrf().disable()
+                .cors().configurationSource(new CorsConfigurationSource() {
 
-            @Override
-            @Nullable
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-               CorsConfiguration cfg=new CorsConfiguration()
-               cfg.setAllowedOrigins(
-                Array.asList(
-                    "http://localhost:3000",
-                    "http://localhost:4200",
+                    @Override
+                    @Nullable
+                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                        CorsConfiguration cfg = new CorsConfiguration()
+                        cfg.setAllowedOrigins(
+                                Array.asList(
+                                        "http://localhost:3000",
+                                        "http://localhost:4200",
+                                ));
+                        cfg.setAllowedMethods(Collections.singletonList("*");
+                        cfg.setAllowCredentials(true);
+                        return null
+                    }
 
+                }
                 )
-               );
-
-               return null
-            }
-            
-            
-        }
-        )
 
         return null;
     }
