@@ -41,11 +41,11 @@ public class AppConfig {
                         cfg.setExposedHeaders(Arrays.asList("Authorization"));
                         cfg.setMaxAge(3600L);
                         return cfg;
-                        return null;
+                        
                     }
 
                 }
-                )
+                );
 
         return null;
     }
