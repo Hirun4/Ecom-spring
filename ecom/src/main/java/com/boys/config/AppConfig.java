@@ -1,5 +1,9 @@
 package com.boys.config;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.Nullable;
@@ -11,37 +15,45 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@Configuration 
+
+//  The @Configuration annotation marks this class as a configuration class in Spring, indicating
+//  that it contains bean definitions that Spring will use to configure the application context.
+@Configuration
 public class AppConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
+//     The method takes a HttpSecurity object as a parameter, which is used to customize HTTP security settings.
+// This method will define how the application will handle requests in terms of security (authentication,
+//  authorization, session management, etc.).
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        .authorizeHttpRequests(Authorize->Authorize.requestMatchers("/api/**").authenticated().anyRequest().permitAll())
-        .addFilterBefore(null, null).csrf().disable()
-        .cors().configurationSource(new CorsConfigurationSource(){
+                .authorizeHttpRequests(Authorize -> Authorize.requestMatchers("/api/**").authenticated().anyRequest().permitAll())
+                .addFilterBefore(null, null).csrf().disable()
+                .cors().configurationSource(new CorsConfigurationSource() {
 
-            @Override
-            @Nullable
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-               CorsConfiguration cfg=new CorsConfiguration()
-               cfg.setAllowedOrigins(
-                Array.asList(
-                    "http://localhost:3000",
-                    "http://localhost:4200",
+                    @Override
+                    @Nullable
+                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                        CorsConfiguration cfg = new CorsConfiguration();
+                        cfg.setAllowedOrigins(
+                                Arrays.asList(
+                                        "http://localhost:3000",
+                                        "http://localhost:4200"
+                                ));
+                        cfg.setAllowedMethods(Collections.singletonList("*"));
+                        cfg.setAllowCredentials(true);
+                        cfg.setAllowedHeaders(Collections.singletonList("*"));
+                        cfg.setExposedHeaders(Arrays.asList("Authorization"));
+                        cfg.setMaxAge(3600L);
+                        return cfg;
+                        
+                    }
 
-                )
-               );
+                }
+                ).and().httpBasic().and().formLogin();
 
-               return null
-            }
-            
-            
-        }
-        )
-
-        return null;
+        return http.build();
     }
 }
