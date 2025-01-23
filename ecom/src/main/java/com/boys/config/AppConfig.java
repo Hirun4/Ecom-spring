@@ -25,7 +25,7 @@ public class AppConfig {
 
 //     The method takes a HttpSecurity object as a parameter, which is used to customize HTTP security settings.
 // This method will define how the application will handle requests in terms of security (authentication,
-//  authorization, session management, etc.).
+//  authorization, session management, etc
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
