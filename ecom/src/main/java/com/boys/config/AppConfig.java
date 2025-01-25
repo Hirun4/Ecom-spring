@@ -1,5 +1,6 @@
 package com.boys.config;
 
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -62,7 +63,7 @@ public class AppConfig {
 
     
 
-    
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
